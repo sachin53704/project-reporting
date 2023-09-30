@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Auth\LogindController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/theme/login', [DashboardController::class, 'login']);
+Route::get('/', function(){
+    return view('auth.login');
 });
 
 Route::group(['middleware' => ['auth']], function() {
+    Route::get('/dashboard', [DashboardController::class, 'dashboard']);
+    Route::get('/theme/form', [DashboardController::class, 'form']);
+    Route::get('/theme/table', [DashboardController::class, 'table']);
 });
 
 Auth::routes([
@@ -25,5 +32,7 @@ Auth::routes([
     'reset' => false, // Password Reset Routes...
     'verify' => false, // Email Verification Routes...
 ]);
+
+// Route::get('demo', )
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
