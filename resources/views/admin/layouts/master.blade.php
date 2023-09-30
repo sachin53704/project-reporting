@@ -105,8 +105,7 @@
 
 
                         <div class="dropdown d-inline-block">
-                            <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn header-item waves-effect"id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-4.jpg') }}"
                                     alt="Header Avatar">
                                 <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">Marcus</span>
@@ -114,7 +113,7 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
-                                <a class="dropdown-item" href="#"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">View Profile</span></a>
+                                <a class="dropdown-item" href="#"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">Change Password</span></a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                               document.getElementById('logout-form').submit();"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Sign out</span></a>
