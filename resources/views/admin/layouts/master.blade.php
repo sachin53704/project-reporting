@@ -21,7 +21,7 @@
 
         <!-- datepicker css -->
         <link rel="stylesheet" href="{{ asset('assets/libs/flatpickr/flatpickr.min.css') }}">
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" >
         <!-- Bootstrap Css -->
         <link href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" type="text/css" />
 
@@ -106,14 +106,14 @@
 
                         <div class="dropdown d-inline-block">
                             <button type="button" class="btn header-item waves-effect"id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="rounded-circle header-profile-user" src="{{ asset('assets/images/users/avatar-4.jpg') }}"
+                                <img class="rounded-circle header-profile-user" src="{{ (Auth::user()->profile) ? asset('storage/'.Auth::user()->profile) : asset('assets/images/users/avatar-4.jpg') }}"
                                     alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">Marcus</span>
+                                <span class="d-none d-xl-inline-block ms-1 fw-medium font-size-15">{{Auth::user()->name ?? ''}}</span>
                                 <i class="uil-angle-down d-none d-xl-inline-block font-size-15"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
-                                <a class="dropdown-item" href="#"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">Change Password</span></a>
+                                <a class="dropdown-item" href="{{url('admin/change-password')}}"><i class="uil uil-user-circle font-size-18 align-middle text-muted me-1"></i> <span class="align-middle">Change Password</span></a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                               document.getElementById('logout-form').submit();"><i class="uil uil-sign-out-alt font-size-18 align-middle me-1 text-muted"></i> <span class="align-middle">Sign out</span></a>
@@ -160,10 +160,31 @@
                         <ul class="metismenu list-unstyled" id="side-menu">
                             <li class="menu-title">Menu</li>
 
-                            <li>
-                                <a href="{{url('/dashboard')}}">
+                            @php
+                                $mmActive = "";$active = "";
+                                if($_SERVER['REQUEST_URI'] == '/dashboard'){
+                                    $mmActive = "mm-active";
+                                    $active = "active";
+                                }
+                            @endphp
+                            <li class="{{$mmActive}}">
+                                <a href="{{url('/dashboard')}}" class="{{$active}}">
                                     <i class="uil-home-alt"></i>
                                     <span>Dashboard</span>
+                                </a>
+                            </li>
+                            @php
+                                $mmActive = "";$active = "";
+                                if(Request::is('admin/user/*')){
+                                    $mmActive = "mm-active";
+                                    $active = "active";
+                                }
+                            @endphp
+                            <li class="{{$mmActive}}">
+                                <a href="{{url('/admin/user/list')}}" class="{{$active}} waves-effect">
+                                    <i class="bx bx-user"></i>
+                                    <!-- <span class="badge rounded-pill bg-success float-end">New</span> -->
+                                    <span>User</span>
                                 </a>
                             </li>
 
@@ -263,7 +284,7 @@
         <script src="{{ asset('assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
         <script src="{{ asset('assets/libs/bootstrap-maxlength/bootstrap-maxlength.min.js') }}"></script>
         <script src="{{ asset('assets/libs/%40chenfengyuan/datepicker/datepicker.min.js') }}"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <!-- datepicker js -->
         <script src="{{ asset('assets/libs/flatpickr/flatpickr.min.js') }}"></script>
 
