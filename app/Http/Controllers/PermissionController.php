@@ -43,7 +43,7 @@ class PermissionController extends Controller
 
         if($permission)
         {
-            return redirect('/master/permissions');
+            return redirect('/admin/master/permission/list');
         }
     }
 
@@ -60,7 +60,7 @@ class PermissionController extends Controller
 
         if($permission)
         {
-            return redirect('master/permissions');
+            return redirect('admin/master/permission/list');
         }
     }
 
@@ -70,7 +70,7 @@ class PermissionController extends Controller
 
         if($permission)
         {
-            return redirect('master/permissions');
+            return redirect('admin/master/permission/list');
         }
     }
 }

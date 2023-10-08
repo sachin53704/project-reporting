@@ -24,25 +24,32 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form action="{{url('admin/user/update')}}" method="post">
+                <form action="{{url('admin/user/update')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id" value="{{$user->id}}" />
+                    <input type="hidden" name="id" value="{{ $user->id }}" />
                     <div class="mb-3">
                         <label for="example-text-input" class="col-form-label">Name <span class="text-danger">*</span></label>
                         @error('name')
                             <div class="text-danger">{{$message}}</div>
                         @enderror
-                        <input class="form-control" type="text" value="{{$user->name}}" autocomplete="off" name="name" placeholder="Enter name">
+                        <input class="form-control" type="text" autocomplete="off" name="name" placeholder="Enter name" required value="{{ $user->name }}">
                     </div>
                     <div class="mb-3">
-                        <label for="example-text-input" class="col-form-label">Email <span class="text-danger">*</span></label>
-                        @error('email')
+                        <label for="example-text-input" class="col-form-label">Username <span class="text-danger">*</span></label>
+                        @error('username')
                             <div class="text-danger">{{$message}}</div>
                         @enderror
-                        <input class="form-control" type="email" value="{{$user->email}}" autocomplete="off" name="email" placeholder="Enter email">
+                        <input class="form-control" type="text" autocomplete="off" name="username" placeholder="Enter username" value="{{ $user->username }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="example-text-input" class="col-form-label">New Password </label>
+                        <label for="example-text-input" class="col-form-label">Mobile <span class="text-danger">*</span></label>
+                        @error('mobile')
+                            <div class="text-danger">{{$message}}</div>
+                        @enderror
+                        <input class="form-control" type="number" autocomplete="off" name="mobile" placeholder="Enter mobile" value="{{ $user->mobile }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-form-label">New Password</label>
                         @error('password')
                             <div class="text-danger">{{$message}}</div>
                         @enderror
@@ -50,11 +57,22 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="example-text-input" class="col-form-label">Profile Image </label>
+                        @error('profile')
+                            <div class="text-danger">{{$message}}</div>
+                        @enderror
+                        @if($user->profile)
+                        <img src="{{ asset('storage/'.$user->profile) }}" style="width: 100px;" />
+                        @endif
+                        <input class="form-control" type="file" accept="image/*" name="profile">
+                    </div>
+
+                    <div class="mb-3">
                         <label class="ccol-form-label">Select Role <span class="text-danger">*</span></label>
-                        <select class="form-select" name="assign_role">
+                        <select class="form-select" name="assign_role" required>
                             <option>Select</option>
                             @foreach($roles as $role)
-                            <option @if($role->id == $user->roles[0]->pivot->role_id)selected @endif value="{{$role->name}}">{{$role->name}}</option>
+                            <option  @if(isset($user->roles[0]))@if($role->id == $user->roles[0]->pivot->role_id)selected @endif @endif value="{{$role->name}}">{{$role->name}}</option>
                             @endforeach
                         </select>
                     </div>

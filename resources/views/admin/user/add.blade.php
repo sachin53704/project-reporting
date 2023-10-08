@@ -34,11 +34,18 @@
                         <input class="form-control" type="text" autocomplete="off" name="name" placeholder="Enter name">
                     </div>
                     <div class="mb-3">
-                        <label for="example-text-input" class="col-form-label">Email <span class="text-danger">*</span></label>
-                        @error('email')
+                        <label for="example-text-input" class="col-form-label">Username <span class="text-danger">*</span></label>
+                        @error('username')
                             <div class="text-danger">{{$message}}</div>
                         @enderror
-                        <input class="form-control" type="email" autocomplete="off" name="email" placeholder="Enter email">
+                        <input class="form-control" type="text" autocomplete="off" name="username" placeholder="Enter username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-form-label">Mobile <span class="text-danger">*</span></label>
+                        @error('mobile')
+                            <div class="text-danger">{{$message}}</div>
+                        @enderror
+                        <input class="form-control" type="number" autocomplete="off" name="mobile" placeholder="Enter mobile">
                     </div>
                     <div class="mb-3">
                         <label for="example-text-input" class="col-form-label">Password <span class="text-danger">*</span></label>

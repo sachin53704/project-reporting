@@ -17,7 +17,7 @@ class UserRepository{
     }
     // function to get user list
     public function list(){
-        $users = User::withWhereHas('roles')->select('id', 'name', 'email')->get();
+        $users = User::select('id', 'name', 'username', 'mobile', 'profile')->get();
 
         return $users;
     }
@@ -25,21 +25,13 @@ class UserRepository{
     public function store($req){
         $user = new User;
         $user->name = $req->name;
-        $user->email = $req->email;
-        // $user->mobile = $req->mobile;
+        $user->username = $req->username;
+        $user->mobile = $req->mobile;
         $user->password = bcrypt($req->password);
 
-        // $user->roles()->detach();
-        $user->assignRole($req->assign_role);
-
-        // if($req->hasFile('profile')) {
-        //     $imageName = time().''.Auth::user()->id.''.$req->profile->getClientOriginalExtension();
-        //     $req->file('profile')->storeAs('public/user/profile', $imageName);
-        //     $user->profile = 'user/profile/' . $imageName;
-        // }
-
         $user->profile = $this->imageRepository->storeImage($req, 'profile', 'user/profile', time().Auth::user()->id);
-
+        
+        $user->assignRole($req->assign_role);
         if($user->save()){
             return true;
         }
@@ -52,11 +44,13 @@ class UserRepository{
     public function update($req){
         $user = User::find($req->id);
         $user->name = $req->name;
-        $user->email = $req->email;
+        $user->username = $req->username;
+        $user->mobile = $req->mobile;
         // $user->mobile = $req->mobile;
         if($req->password != "")
             $user->password = bcrypt($req->password);
 
+        $user->profile = $this->imageRepository->updateImage($req, $user->profile,  'profile', 'user/profile', time().Auth::user()->id);
         $user->roles()->detach();
         $user->assignRole($req->assign_role);
 

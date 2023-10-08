@@ -8,12 +8,12 @@
 
             <div class="page-title-left">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="{{url('master/roles')}}">Role</a></li>
+                    <li class="breadcrumb-item"><a href="{{url('admin/master/role/list')}}">Role</a></li>
                     <li class="breadcrumb-item active">edit</li>
                 </ol>
             </div>
             {{-- <div class="page-title-right">
-                <a href="{{url('master/roles')}}" class="btn btn-primary btn-sm">Back</a>
+                <a href="{{url('admin/master/role/list')}}" class="btn btn-primary btn-sm">Back</a>
             </div> --}}
 
         </div>
@@ -24,7 +24,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form action="{{url('master/roles/update')}}" method="post">
+                <form action="{{url('admin/master/role/update')}}" method="post">
                     @csrf
                     <input type="hidden" name="id" value="{{encrypt($role->id)}}" />
                     <div class="mb-3">
@@ -50,10 +50,24 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $permissionName = [
+                                            'Dashboard' => ['dashboard.view'],
+                                            'Permission' => ['permission.add', 'permission.edit', 'permission.view'],
+                                            'Project' => ['project.add', 'project.edit', 'project.view'],
+                                            'Project Type' => ['project_type.add', 'project_type.edit', 'project_type.view'],
+                                            'Role' => ['role.add', 'role.edit', 'role.view'],
+                                            'Task' => ['task.add', 'task.edit', 'task.view'],
+                                            'User' => ['user.add', 'user.edit', 'user.view'],
+                                        ];
+                                        
+                                    @endphp
+
+                                    @foreach($permissionName as $key => $permission)
                                     <tr>
-                                        <td>User</td>
+                                        <td>{{ $key }}</td>
                                         <td>
-                                            <?php $org = ['user.add', 'user.edit', 'user.list']; ?>
+                                            <?php $org = $permission; ?>
                                             <div class="row permissions-check d-flex">
                                             @foreach($permissions as $perm)
                                             @if(in_array($perm->name, $org))
@@ -71,12 +85,13 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
 
                     </div>
-                    <a href="{{url('master/roles')}}" class="btn btn-danger waves-effect waves-light w-md">Cancel</a>
+                    <a href="{{url('admin/master/role/list')}}" class="btn btn-danger waves-effect waves-light w-md">Cancel</a>
                     <button type="submit" class="btn btn-primary waves-effect waves-light w-md">Submit</button>
                 </form>
             </div>

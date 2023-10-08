@@ -47,7 +47,7 @@ class RoleController extends Controller
         {
             session()->flash('success', 'Role '.$req->name.' added successfully');
 
-            return redirect('/master/roles');
+            return redirect('/admin/master/role/list');
         }
 
     }
@@ -71,7 +71,7 @@ class RoleController extends Controller
         {
             session()->flash('success', 'Role '.$request->name.' updated successfully');
 
-            return redirect('/master/roles');
+            return redirect('/admin/master/role/list');
         }
     }
 }

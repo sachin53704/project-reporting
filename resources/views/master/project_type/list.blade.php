@@ -9,13 +9,13 @@
 
             <div class="page-title-left">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="{{url('master/permissions')}}">Permission</a></li>
+                    <li class="breadcrumb-item"><a href="{{url('admin/master/project-type/list')}}">Project Type</a></li>
                     <li class="breadcrumb-item active">list</li>
                 </ol>
             </div>
-            @can('permission.add')
+            @can('project_type.add')
             <div class="page-title-right">
-                <a href="{{url('admin/master/permission/add')}}" class="btn btn-primary btn-sm">Add</a>
+                <a href="{{url('admin/master/project-type/add')}}" class="btn btn-primary btn-sm">Add</a>
             </div>
             @endcan
 
@@ -35,6 +35,7 @@
                         <tr>
                             <th>Sr No.</th>
                             <th>Name</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -60,7 +61,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ url('/admin/master/permission/list') }}",
+                    url: "{{ url('/admin/master/project-type/list') }}",
                 },
                 columns: [
                     {
@@ -80,13 +81,26 @@
                         },
                     },
                     {
+                        data: 'status',
+                        name: 'status',
+                        render: function(data, type, row){
+                            let html = "";
+                            if(data == "1"){
+                                html += `<span class="badge bg-success">Active</span>`;
+                            }else{
+                                html += `<span class="badge bg-danger">Inactive</span>`;
+                            }
+                            return html;
+                        },
+                    },
+                    {
                         data: 'id',
                         orderable: false,
                         searchable: false,
                         render: function(data, type, row){
-                            let html = '-';
-                            @can('permission.edit')
-                            html = `<a href="{{url('/')}}/admin/master/permission/edit/${data}"><i class="bx bx-edit"></i></a>`;
+                            let html = '';
+                            @can('project_type.edit')
+                            html = `<a href="{{url('/')}}/admin/master/project-type/edit/${data}"><i class="bx bx-edit"></i></a>`;
                             @endcan
                             return html;
                         },

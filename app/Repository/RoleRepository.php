@@ -22,7 +22,7 @@ class RoleRepository
     {
         if($req->name)
         {
-            Role::create(['name' => $req->get('name')]);
+            Role::create(['name' => $req->name]);
         }
 
         return true;
@@ -49,6 +49,8 @@ class RoleRepository
     public function update($req=null)
     {
         $role = Role::find(decrypt($req->id));
+        $role->name = $req->name;
+        $role->save();
 
         $rolePermisisons = $role->permissions->pluck('id')->toArray();
 

@@ -47,9 +47,9 @@
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
                                         <div class="mb-3">
-                                            <label class="form-label" for="email">Email</label>
-                                            <input type="email" class="form-control" name="email" id="email" placeholder="Enter email">
-                                            @error('email')
+                                            <label class="form-label" for="username">Username</label>
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+                                            @error('username')
                                                 <span class="text-danger" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

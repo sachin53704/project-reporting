@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Repository\Admin\UserRepository;
 use App\Repository\Admin\CommonRepository;
 use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -21,15 +22,16 @@ class UserController extends Controller
     }
 
     public function list(Request $req){
-        // $users = $this->userRepository->list();
-        // return $users;
         if($req->ajax()){
             $users = $this->userRepository->list();
 
             return DataTables::of($users)
                     ->addIndexColumn()
                     ->editColumn('role', function($data){
-                        return $data->roles[0]->name;
+                        return $data->roles[0]->name ?? '';
+                    })
+                    ->editColumn('profile', function($data){
+                        return ($data->profile) ? asset('storage/'.$data->profile): "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg";
                     })
                     ->toJson();
         }

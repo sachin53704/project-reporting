@@ -9,13 +9,15 @@
 
             <div class="page-title-left">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="{{url('master/roles')}}">Role</a></li>
+                    <li class="breadcrumb-item"><a href="{{url('admin/master/role/list')}}">Role</a></li>
                     <li class="breadcrumb-item active">list</li>
                 </ol>
             </div>
+            @can('role.add')
             <div class="page-title-right">
-                <a href="{{url('master/roles/add')}}" class="btn btn-primary btn-sm">Add</a>
+                <a href="{{url('admin/master/role/add')}}" class="btn btn-primary btn-sm">Add</a>
             </div>
+            @endcan
 
         </div>
     </div>
@@ -28,7 +30,7 @@
                 {{-- <div class="d-flex justify-content-end">
 
                 </div> --}}
-                <table id="datatable" class="table table-bordered ">
+                <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
                             <th>Sr No.</th>
@@ -58,7 +60,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ url('/master/roles') }}",
+                    url: "{{ url('/admin/master/role/list') }}",
                 },
                 columns: [
                     {
@@ -83,7 +85,9 @@
                         searchable: false,
                         render: function(data, type, row){
                             let html = '';
-                            html = `<a href="{{url('/')}}/master/roles/edit/${data}"><i class="bx bx-edit"></i></a>`;
+                            @can('role.edit')
+                            html = `<a href="{{url('/')}}/admin/master/role/edit/${data}"><i class="bx bx-edit"></i></a>`;
+                            @endcan
                             return html;
                         },
                     }

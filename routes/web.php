@@ -8,6 +8,9 @@ use App\Http\Controllers\PermissionController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectTypeController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,19 +39,19 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/theme/table', [DashboardController::class, 'table']);
 
     // Manage Role Master
-    Route::get('/master/roles', [RoleController::class, 'list'])->name('roles.list');
-    Route::get('/master/roles/add', [RoleController::class, 'add'])->name('role.add');
-    Route::post('/master/roles/store', [RoleController::class, 'store']);
-    Route::get('/master/roles/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
-    Route::post('/master/roles/update', [RoleController::class, 'update']);
+    Route::get('/admin/master/role/list', [RoleController::class, 'list'])->name('roles.list');
+    Route::get('/admin/master/role/add', [RoleController::class, 'add'])->name('role.add');
+    Route::post('/admin/master/role/store', [RoleController::class, 'store']);
+    Route::get('/admin/master/role/edit/{id}', [RoleController::class, 'edit'])->name('role.edit');
+    Route::post('/admin/master/role/update', [RoleController::class, 'update']);
 
     // Manage Permission Master
-    Route::get('/master/permissions', [PermissionController::class, 'list'])->name('permissions.list');
-    Route::get('/master/permissions/add', [PermissionController::class, 'add'])->name('permission.add');
-    Route::post('/master/permissions/store', [PermissionController::class, 'store']);
-    Route::get('/master/permissions/edit/{id}', [PermissionController::class, 'edit'])->name('permission.edit');
-    Route::post('/master/permissions/update', [PermissionController::class, 'update']);
-    Route::post('/master/permissions/delete', [PermissionController::class, 'delete'])->name('permission.delete');
+    Route::get('/admin/master/permission/list', [PermissionController::class, 'list'])->name('permissions.list');
+    Route::get('/admin/master/permission/add', [PermissionController::class, 'add'])->name('permission.add');
+    Route::post('/admin/master/permission/store', [PermissionController::class, 'store']);
+    Route::get('/admin/master/permission/edit/{id}', [PermissionController::class, 'edit'])->name('permission.edit');
+    Route::post('/admin/master/permission/update', [PermissionController::class, 'update']);
+    Route::post('/admin/master/permission/delete', [PermissionController::class, 'delete'])->name('permission.delete');
 
     // Route for change password
     Route::get('/admin/change-password/', [ChangePasswordController::class, 'changePassword'])->name('admin.change-password');
@@ -60,6 +63,27 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/user/store', [UserController::class, 'store']);
     Route::get('/admin/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::post('/admin/user/update', [UserController::class, 'update']);
+
+    // Route for project
+    Route::get('/admin/master/project/list', [ProjectController::class, 'list']);
+    Route::get('/admin/master/project/add', [ProjectController::class, 'add']);
+    Route::post('/admin/master/project/store', [ProjectController::class, 'store']);
+    Route::get('/admin/master/project/edit/{id}', [ProjectController::class, 'edit']);
+    Route::post('/admin/master/project/update', [ProjectController::class, 'update']);
+
+    // Route for project type
+    Route::get('/admin/master/project-type/list', [ProjectTypeController::class, 'list']);
+    Route::get('/admin/master/project-type/add', [ProjectTypeController::class, 'add']);
+    Route::post('/admin/master/project-type/store', [ProjectTypeController::class, 'store']);
+    Route::get('/admin/master/project-type/edit/{id}', [ProjectTypeController::class, 'edit']);
+    Route::post('/admin/master/project-type/update', [ProjectTypeController::class, 'update']);
+
+    // Route for tasks
+    Route::get('/admin/master/task/list', [TaskController::class, 'list']);
+    Route::get('/admin/master/task/add', [TaskController::class, 'add']);
+    Route::post('/admin/master/task/store', [TaskController::class, 'store']);
+    Route::get('/admin/master/task/edit/{id}', [TaskController::class, 'edit']);
+    Route::post('/admin/master/task/update', [TaskController::class, 'update']);
 });
 
 Auth::routes([

@@ -18,7 +18,7 @@ class ImageRepository{
 
     // function to update Image
     public function updateImage($req, $fileColumnName, $reqFileName, $path, $fileName){
-        $name = null;
+        $name = $fileColumnName;
         if($req->hasFile($reqFileName)) {
             if($fileColumnName && $fileColumnName != "") {
                 if (Storage::exists('public/'.$fileColumnName)){

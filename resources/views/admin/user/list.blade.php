@@ -13,9 +13,11 @@
                     <li class="breadcrumb-item active">list</li>
                 </ol>
             </div>
+            @can('user.add')
             <div class="page-title-right">
                 <a href="{{url('admin/user/add')}}" class="btn btn-primary btn-sm">Add</a>
             </div>
+            @endcan
 
         </div>
     </div>
@@ -28,12 +30,14 @@
                 {{-- <div class="d-flex justify-content-end">
 
                 </div> --}}
-                <table id="datatable" class="table table-bordered ">
+                <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
                             <th>Sr No.</th>
                             <th>Name</th>
-                            <th>Email</th>
+                            <th>Profile</th>
+                            <th>Username</th>
+                            <th>Mobile</th>
                             <th>Role</th>
                             <th>Action</th>
                         </tr>
@@ -80,8 +84,16 @@
                         },
                     },
                     {
-                        data: 'email',
-                        name: 'email',
+                        data: 'profile',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, row){
+                            return `<img src="${data}" style="width:50px;height:auto;" >`;
+                        },
+                    },
+                    {
+                        data: 'username',
+                        name: 'username',
                         render: function(data, type, row){
                             return data;
                         },
@@ -94,12 +106,21 @@
                         },
                     },
                     {
+                        data: 'mobile',
+                        name: 'mobile',
+                        render: function(data, type, row){
+                            return data;
+                        },
+                    },
+                    {
                         data: 'id',
                         orderable: false,
                         searchable: false,
                         render: function(data, type, row){
                             let html = '';
+                            @can('user.edit')
                             html = `<a href="{{url('/')}}/admin/user/edit/${data}"><i class="bx bx-edit"></i></a>`;
+                            @endcan
                             return html;
                         },
                     }

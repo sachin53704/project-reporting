@@ -167,12 +167,14 @@
                                     $active = "active";
                                 }
                             @endphp
+                            @can('dashboard.view')
                             <li class="{{$mmActive}}">
                                 <a href="{{url('/dashboard')}}" class="{{$active}}">
                                     <i class="uil-home-alt"></i>
                                     <span>Dashboard</span>
                                 </a>
                             </li>
+                            @endcan
                             @php
                                 $mmActive = "";$active = "";
                                 if(Request::is('admin/user/*')){
@@ -180,6 +182,7 @@
                                     $active = "active";
                                 }
                             @endphp
+                            @can('user.view')
                             <li class="{{$mmActive}}">
                                 <a href="{{url('/admin/user/list')}}" class="{{$active}} waves-effect">
                                     <i class="bx bx-user"></i>
@@ -187,6 +190,7 @@
                                     <span>User</span>
                                 </a>
                             </li>
+                            @endcan
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -194,20 +198,38 @@
                                     <span>Master</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="true">
+                                    @can('project.view')
                                     <li>
-                                        <a href="javascript: void(0);">City</a>
-                                        {{-- <ul class="sub-menu" aria-expanded="true">
-                                            <li><a href="layouts-dark-sidebar.html">Dark Sidebar</a></li>
-                                            <li><a href="layouts-compact-sidebar.html">Compact Sidebar</a></li>
-                                            <li><a href="layouts-icon-sidebar.html">Icon Sidebar</a></li>
-                                            <li><a href="layouts-boxed.html">Boxed Width</a></li>
-                                            <li><a href="layouts-preloader.html">Preloader</a></li>
-                                            <li><a href="layouts-colored-sidebar.html">Colored Sidebar</a></li>
-                                        </ul> --}}
+                                        <a href="{{ url('admin/master/project/list') }}">
+                                            <i class="bx bxl-product-hunt"></i>
+                                            <span>Project</span>
+                                        </a>
                                     </li>
+                                    @endcan
+                                    @can('project_type.view')
                                     <li>
-                                        <a href="javascript: void(0);">City1</a>
+                                        <a href="{{ url('admin/master/project-type/list') }}">
+                                            <i class="bx bxl-product-hunt"></i>
+                                            <span>Project Type</span>
+                                        </a>
                                     </li>
+                                    @endcan
+                                    @can('role.view')
+                                    <li>
+                                        <a href="{{ url('admin/master/role/list') }}">
+                                            <i class="bx bxl-product-hunt"></i>
+                                            <span>Roles</span>
+                                        </a>
+                                    </li>
+                                    @endcan
+                                    @can('permission.view')
+                                    <li>
+                                        <a href="{{ url('/admin/master/permission/list') }}">
+                                            <i class="bx bxl-product-hunt"></i>
+                                            <span>Permissions</span>
+                                        </a>
+                                    </li>
+                                    @endcan
                                 </ul>
                             </li>
 
