@@ -13,13 +13,16 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('project_type_id');
-            $table->longText('descrption');
+            $table->text('description');
+            $table->date('date');
             $table->time('start_time');
             $table->time('end_time');
             $table->foreign('project_type_id')->references('id')->on('project_types');
             $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -79,11 +79,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/master/project-type/update', [ProjectTypeController::class, 'update']);
 
     // Route for tasks
-    Route::get('/admin/master/task/list', [TaskController::class, 'list']);
-    Route::get('/admin/master/task/add', [TaskController::class, 'add']);
-    Route::post('/admin/master/task/store', [TaskController::class, 'store']);
-    Route::get('/admin/master/task/edit/{id}', [TaskController::class, 'edit']);
-    Route::post('/admin/master/task/update', [TaskController::class, 'update']);
+    Route::get('/admin/task/list', [TaskController::class, 'list']);
+    Route::get('/admin/task/add', [TaskController::class, 'add']);
+    Route::post('/admin/task/store', [TaskController::class, 'store']);
+    Route::get('/admin/task/edit/{id}', [TaskController::class, 'edit']);
+    Route::post('/admin/task/update', [TaskController::class, 'update']);
 });
 
 Auth::routes([

@@ -192,6 +192,23 @@
                             </li>
                             @endcan
 
+                            @php
+                                $mmActive = "";$active = "";
+                                if(Request::is('admin/task/*')){
+                                    $mmActive = "mm-active";
+                                    $active = "active";
+                                }
+                            @endphp
+                            @can('user.view')
+                            <li class="{{$mmActive}}">
+                                <a href="{{url('/admin/task/list')}}" class="{{$active}} waves-effect">
+                                    <i class="bx bx-task"></i>
+                                    <!-- <span class="badge rounded-pill bg-success float-end">New</span> -->
+                                    <span>Task</span>
+                                </a>
+                            </li>
+                            @endcan
+
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="uil-window-section"></i>
