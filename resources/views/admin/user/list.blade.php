@@ -39,6 +39,7 @@
                             <th>Username</th>
                             <th>Mobile</th>
                             <th>Role</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -110,6 +111,19 @@
                         name: 'mobile',
                         render: function(data, type, row){
                             return data;
+                        },
+                    },
+                    {
+                        data: 'status',
+                        name: 'status',
+                        render: function(data, type, row){
+                            let html = "";
+                            if(data == "1"){
+                                html += `<span class="badge bg-success">Active</span>`;
+                            }else{
+                                html += `<span class="badge bg-danger">Inactive</span>`;
+                            }
+                            return html;
                         },
                     },
                     {

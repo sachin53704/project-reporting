@@ -44,6 +44,11 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="example-text-input" class="col-form-label">Module</label>
+
+                        <input class="form-control" type="text" autocomplete="off" name="module" value="{{ $task->module }}">
+                    </div>
 
                     <div class="mb-3">
                         <label for="example-text-input" class="col-form-label">Description <span class="text-danger">*</span></label>
@@ -55,10 +60,10 @@
 
                     <div class="mb-3">
                         <label class="col-form-label">Select Work Status <span class="text-danger">*</span></label>
-                        <select class="form-select" name="project_type_id" required>
+                        <select class="form-select" name="work_status_id" required>
                             <option value="">Select</option>
-                            @foreach($projectTypes as $projectType)
-                            <option  @if($task->project_type_id == $projectType->id)selected @endif value="{{$projectType->id}}">{{$projectType->name}}</option>
+                            @foreach($workStatus as $workStat)
+                            <option  @if($task->work_status_id == $workStat->id)selected @endif value="{{$workStat->id}}">{{$workStat->name}}</option>
                             @endforeach
                         </select>
                     </div>

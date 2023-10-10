@@ -8,8 +8,8 @@
 
             <div class="page-title-left">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="{{url('admin/master/project-type/list')}}">Project Type</a></li>
-                    <li class="breadcrumb-item active">Edit</li>
+                    <li class="breadcrumb-item"><a href="{{url('admin/master/work-status/list')}}">Work Status</a></li>
+                    <li class="breadcrumb-item active">Add</li>
                 </ol>
             </div>
             {{-- <div class="page-title-right">
@@ -24,26 +24,25 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form action="{{url('admin/master/project-type/update')}}" method="post" enctype="multipart/form-data">
+                <form action="{{url('admin/master/work-status/store')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id" value="{{ $projectType->id }}" />
                     <div class="mb-3">
                         <label for="example-text-input" class="col-form-label">Name <span class="text-danger">*</span></label>
                         @error('name')
                             <div class="text-danger">{{$message}}</div>
                         @enderror
-                        <input class="form-control" type="text" autocomplete="off" name="name" placeholder="Enter name" value="{{ $projectType->name }}">
+                        <input class="form-control" type="text" autocomplete="off" name="name" placeholder="Enter name">
                     </div>
 
                     <div class="mb-3">
                         <label class="ccol-form-label">Select Status <span class="text-danger">*</span></label>
                         <select class="form-select" name="status">
-                            <option @if($projectType->status == "1")selected @endif value="1">Active</option>
-                            <option @if($projectType->status == "0")selected @endif value="0">Inactive</option>
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
                         </select>
                     </div>
 
-                    <a href="{{url('admin/master/project-type/list')}}" class="btn btn-danger waves-effect waves-light w-md">Cancel</a>
+                    <a href="{{url('admin/master/work-status/list')}}" class="btn btn-danger waves-effect waves-light w-md">Cancel</a>
                     <button type="submit" class="btn btn-primary waves-effect waves-light w-md">Submit</button>
                 </form>
             </div>

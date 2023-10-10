@@ -4,7 +4,7 @@ namespace App\Repository\Admin;
 
 use Spatie\Permission\Models\Role;
 use App\Models\Project;
-use App\Models\ProjectType;
+use App\Models\WorkStatus;
 
 class CommonRepository{
     // function to get roles
@@ -16,7 +16,7 @@ class CommonRepository{
         return Project::where('status', 1)->select('id', 'name')->get();
     }
 
-    public function getActiveProjectType(){
-        return ProjectType::where('status', 1)->select('id', 'name')->get();
+    public function getActiveWorkStatus(){
+        return WorkStatus::where('status', 1)->select('id', 'name')->get();
     }
 }

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('ip')->nullable();
             $table->string('login_session')->nullable();
             $table->dateTime('login_time')->nullable();
+            $table->boolean('status')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -22,6 +22,15 @@ class TaskController extends Controller
 
             return DataTables::of($tasks)
                     ->addIndexColumn()
+                    ->editColumn('date', function($data){
+                        return date('d-m-Y', strtotime($data->date)) ?? '';
+                    })
+                    ->editColumn('start_time', function($data){
+                        return date('h:i A', strtotime($data->start_time)) ?? '';
+                    })
+                    ->editColumn('end_time', function($data){
+                        return date('h:i A', strtotime($data->end_time)) ?? '';
+                    })
                     ->toJson();
         }
 
@@ -31,11 +40,11 @@ class TaskController extends Controller
     public function add(){
         $projects = $this->commonRepository->getActiveProject();
 
-        $projectTypes = $this->commonRepository->getActiveProjectType();
+        $workStatus = $this->commonRepository->getActiveWorkStatus();
 
         return view('task.add')->with([
             'projects' => $projects,
-            'projectTypes' => $projectTypes
+            'workStatus' => $workStatus
         ]);
     }
 
@@ -54,12 +63,12 @@ class TaskController extends Controller
 
         $projects = $this->commonRepository->getActiveProject();
 
-        $projectTypes = $this->commonRepository->getActiveProjectType();
+        $workStatus = $this->commonRepository->getActiveWorkStatus();
 
         return view('task.edit')->with([
             'task' => $task,
             'projects' => $projects,
-            'projectTypes' => $projectTypes
+            'workStatus' => $workStatus
         ]);
     }
 

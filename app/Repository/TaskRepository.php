@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repository;
 
@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Auth;
 class TaskRepository{
     public function list(){
         $tasks = Task::join('users', 'users.id', '=', 'tasks.user_id')
-               ->leftJoin('projects', 'projects.id', '=', 'tasks.project_id')   
-               ->leftJoin('project_types', 'project_types.id', '=', 'tasks.project_type_id');
-        
+               ->leftJoin('projects', 'projects.id', '=', 'tasks.project_id')
+               ->leftJoin('work_status', 'work_status.id', '=', 'tasks.work_status_id');
+
         if(!Auth::user()->hasRole('Super Admin')){
             $tasks = $tasks->where('tasks.user_id', Auth::user()->id);
         }
 
-        $tasks = $tasks->select('tasks.id', 'users.name as user_name', 'projects.name as project_name', 'project_types.name as project_type_name', 'tasks.description', 'tasks.start_time', 'tasks.end_time', 'tasks.date');
+        $tasks = $tasks->select('tasks.id', 'users.name as user_name', 'projects.name as project_name', 'work_status.name as work_status_name', 'tasks.description', 'tasks.start_time', 'tasks.end_time', 'tasks.date', 'tasks.module');
 
         return $tasks;
     }
@@ -26,7 +26,8 @@ class TaskRepository{
                 $task = new Task;
                 $task->user_id = Auth::user()->id;
                 $task->project_id = $req->project_id[$i];
-                $task->project_type_id = $req->project_type_id[$i];
+                $task->work_status_id = $req->work_status_id[$i];
+                $task->module = $req->module[$i];
                 $task->description = $req->description[$i];
                 $task->date = date('Y-m-d', strtotime($req->date[$i]));
                 $task->start_time = date('H:i:s', strtotime($req->start_time[$i]));
@@ -45,8 +46,9 @@ class TaskRepository{
     public function update($req){
         $task = Task::find($req->id);
         $task->project_id = $req->project_id;
-        $task->project_type_id = $req->project_type_id;
+        $task->work_status_id = $req->work_status_id;
         $task->description = $req->description;
+        $task->module = $req->module;
         $task->date = date('Y-m-d', strtotime($req->date));
         $task->start_time = date('H:i:s', strtotime($req->start_time));
         $task->end_time = date('H:i:s', strtotime($req->end_time));

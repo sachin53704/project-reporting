@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\ChangePasswordController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\ProjectTypeController;
+use App\Http\Controllers\WorkStatusController;
 use App\Http\Controllers\TaskController;
 
 /*
@@ -72,11 +72,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/master/project/update', [ProjectController::class, 'update']);
 
     // Route for project type
-    Route::get('/admin/master/project-type/list', [ProjectTypeController::class, 'list']);
-    Route::get('/admin/master/project-type/add', [ProjectTypeController::class, 'add']);
-    Route::post('/admin/master/project-type/store', [ProjectTypeController::class, 'store']);
-    Route::get('/admin/master/project-type/edit/{id}', [ProjectTypeController::class, 'edit']);
-    Route::post('/admin/master/project-type/update', [ProjectTypeController::class, 'update']);
+    Route::get('/admin/master/work-status/list', [WorkStatusController::class, 'list']);
+    Route::get('/admin/master/work-status/add', [WorkStatusController::class, 'add']);
+    Route::post('/admin/master/work-status/store', [WorkStatusController::class, 'store']);
+    Route::get('/admin/master/work-status/edit/{id}', [WorkStatusController::class, 'edit']);
+    Route::post('/admin/master/work-status/update', [WorkStatusController::class, 'update']);
 
     // Route for tasks
     Route::get('/admin/task/list', [TaskController::class, 'list']);

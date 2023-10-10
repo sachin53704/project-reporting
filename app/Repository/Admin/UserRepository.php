@@ -17,7 +17,7 @@ class UserRepository{
     }
     // function to get user list
     public function list(){
-        $users = User::select('id', 'name', 'username', 'mobile', 'profile')->get();
+        $users = User::select('id', 'name', 'username', 'mobile', 'profile', 'status')->get();
 
         return $users;
     }
@@ -30,8 +30,9 @@ class UserRepository{
         $user->password = bcrypt($req->password);
 
         $user->profile = $this->imageRepository->storeImage($req, 'profile', 'user/profile', time().Auth::user()->id);
-        
+
         $user->assignRole($req->assign_role);
+        $user->status = $req->status;
         if($user->save()){
             return true;
         }
@@ -53,7 +54,7 @@ class UserRepository{
         $user->profile = $this->imageRepository->updateImage($req, $user->profile,  'profile', 'user/profile', time().Auth::user()->id);
         $user->roles()->detach();
         $user->assignRole($req->assign_role);
-
+        $user->status = $req->status;
         if($user->save()){
             return true;
         }

@@ -39,21 +39,21 @@ class UserSeeder extends Seeder
         Permission::create(['name' => 'project.view']);
         Permission::create(['name' => 'project.add']);
         Permission::create(['name' => 'project.edit']);
-        Permission::create(['name' => 'project_type.view']);
-        Permission::create(['name' => 'project_type.add']);
-        Permission::create(['name' => 'project_type.edit']);
+        Permission::create(['name' => 'work_status.view']);
+        Permission::create(['name' => 'work_status.add']);
+        Permission::create(['name' => 'work_status.edit']);
         Permission::create(['name' => 'task.view']);
         Permission::create(['name' => 'task.add']);
         Permission::create(['name' => 'task.edit']);
 
         $superAdmin =Role::create(['name' => 'Super Admin']);
-        $superAdmin->givePermissionTo('dashboard.view', 'user.view', 'user.add', 'user.edit', 'role.view', 'role.add', 'role.edit', 'permission.view', 'permission.add', 'permission.edit', 'project.view', 'project.add', 'project.edit', 'project_type.view', 'project_type.add', 'project_type.edit', 'task.view', 'task.add', 'task.edit');
+        $superAdmin->givePermissionTo('dashboard.view', 'user.view', 'user.add', 'user.edit', 'role.view', 'role.add', 'role.edit', 'permission.view', 'permission.add', 'permission.edit', 'project.view', 'project.add', 'project.edit', 'work_status.view', 'work_status.add', 'work_status.edit', 'task.view', 'task.add', 'task.edit');
 
         $superAdmin =Role::create(['name' => 'User']);
         $superAdmin->givePermissionTo('dashboard.view', 'task.view', 'task.add', 'task.edit');
 
         $user = User::where('username','admin123')->first();
-        
+
         $user->assignRole('Super Admin');
     }
 }

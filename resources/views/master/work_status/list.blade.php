@@ -9,13 +9,13 @@
 
             <div class="page-title-left">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="{{url('admin/master/project-type/list')}}">Project Type</a></li>
+                    <li class="breadcrumb-item"><a href="{{url('admin/master/work-status/list')}}">Work Status</a></li>
                     <li class="breadcrumb-item active">list</li>
                 </ol>
             </div>
-            @can('project_type.add')
+            @can('work_status.add')
             <div class="page-title-right">
-                <a href="{{url('admin/master/project-type/add')}}" class="btn btn-primary btn-sm">Add</a>
+                <a href="{{url('admin/master/work-status/add')}}" class="btn btn-primary btn-sm">Add</a>
             </div>
             @endcan
 
@@ -61,7 +61,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ url('/admin/master/project-type/list') }}",
+                    url: "{{ url('/admin/master/work-status/list') }}",
                 },
                 columns: [
                     {
@@ -99,8 +99,8 @@
                         searchable: false,
                         render: function(data, type, row){
                             let html = '';
-                            @can('project_type.edit')
-                            html = `<a href="{{url('/')}}/admin/master/project-type/edit/${data}"><i class="bx bx-edit"></i></a>`;
+                            @can('work_status.edit')
+                            html = `<a href="{{url('/')}}/admin/master/work-status/edit/${data}"><i class="bx bx-edit"></i></a>`;
                             @endcan
                             return html;
                         },

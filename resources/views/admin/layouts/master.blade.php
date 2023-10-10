@@ -199,7 +199,7 @@
                                     $active = "active";
                                 }
                             @endphp
-                            @can('user.view')
+                            @can('task.view')
                             <li class="{{$mmActive}}">
                                 <a href="{{url('/admin/task/list')}}" class="{{$active}} waves-effect">
                                     <i class="bx bx-task"></i>
@@ -209,30 +209,56 @@
                             </li>
                             @endcan
 
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            @if(Auth::user()->can('work_status.view') || Auth::user()->can('project.view') || Auth::user()->can('role.view') || Auth::user()->can('permission.view'))
+                            @php
+                                $mmActive = "";$active = "";
+                                if(Request::is('admin/master/*')){
+                                    $mmActive = "mm-active";
+                                    $active = "active";
+                                }
+                            @endphp
+                            <li class="{{$mmActive}}">
+                                <a href="javascript: void(0);" class="{{$active}} has-arrow waves-effect">
                                     <i class="uil-window-section"></i>
                                     <span>Master</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="true">
                                     @can('project.view')
-                                    <li>
+                                    @php
+                                        $mmActive = "";$active = "";
+                                        if(Request::is('admin/master/project/*')){
+                                            $mmActive = "mm-active";
+                                        }
+                                    @endphp
+                                    <li class="{{$mmActive}}">
                                         <a href="{{ url('admin/master/project/list') }}">
                                             <i class="bx bxl-product-hunt"></i>
                                             <span>Project</span>
                                         </a>
                                     </li>
                                     @endcan
-                                    @can('project_type.view')
-                                    <li>
-                                        <a href="{{ url('admin/master/project-type/list') }}">
+                                    @can('work_status.view')
+                                    @php
+                                        $mmActive = "";$active = "";
+                                        if(Request::is('admin/master/work-status/*')){
+                                            $mmActive = "mm-active";
+                                        }
+                                    @endphp
+                                    <li class="{{$mmActive}}">
+                                        <a href="{{ url('admin/master/work-status/list') }}">
                                             <i class="bx bxl-product-hunt"></i>
-                                            <span>Project Type</span>
+                                            <span>Work Status</span>
                                         </a>
                                     </li>
                                     @endcan
                                     @can('role.view')
-                                    <li>
+                                    @php
+                                        $mmActive = "";$active = "";
+                                        if(Request::is('admin/master/role/*')){
+                                            $mmActive = "mm-active";
+                                        }
+                                    @endphp
+                                    <li class="{{$mmActive}}">
                                         <a href="{{ url('admin/master/role/list') }}">
                                             <i class="bx bxl-product-hunt"></i>
                                             <span>Roles</span>
@@ -240,7 +266,13 @@
                                     </li>
                                     @endcan
                                     @can('permission.view')
-                                    <li>
+                                    @php
+                                        $mmActive = "";$active = "";
+                                        if(Request::is('admin/master/permission/*')){
+                                            $mmActive = "mm-active";
+                                        }
+                                    @endphp
+                                    <li class="{{$mmActive}}">
                                         <a href="{{ url('/admin/master/permission/list') }}">
                                             <i class="bx bxl-product-hunt"></i>
                                             <span>Permissions</span>
@@ -249,6 +281,7 @@
                                     @endcan
                                 </ul>
                             </li>
+                            @endif
 
 
                         </ul>
@@ -281,11 +314,11 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-6">
-                                {{date('Y')}} © Coreocean.
+                                {{date('Y')}} © Theme.
                             </div>
                             <div class="col-sm-6">
                                 <div class="text-sm-end d-none d-sm-block">
-                                    Crafted by <a href="https://www.coreocean.in/" target="_blank" class="text-reset">Coreocean</a>
+                                    Crafted by <a href="https://www.coreocean.in/" target="_blank" class="text-reset">Sachin</a>
                                 </div>
                             </div>
                         </div>

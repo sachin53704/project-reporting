@@ -3027,7 +3027,7 @@ body[data-layout=horizontal][data-layout-size=boxed] .navbar-header {
 }
 
 .toast-success {
-	border: 2px solid #34c38f !important;
+	border: 2px solid rgba(52, 195, 143, .8) !important;
 	background-color: rgba(52, 195, 143, .8) !important
 }
 

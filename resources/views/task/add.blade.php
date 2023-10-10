@@ -31,6 +31,7 @@
                             <tr>
                                 <th>Date</th>
                                 <th>Project</th>
+                                <th>Module</th>
                                 <th>Description</th>
                                 <th>Work Status</th>
                                 <th>Start Time</th>
@@ -38,7 +39,7 @@
                                 <th><button type="button" class="btn btn-primary btn-sm" id="addMore"><i class="bx bx-plus-medical"></i></button></th>
                             </tr>
                         </thead>
-                        
+
                         <tbody id="addTaskRow">
                             <tr id="row1">
                                 <td>
@@ -53,13 +54,16 @@
                                     </select>
                                 </td>
                                 <td>
+                                    <input type="text" class="form-control" name="module[]" />
+                                </td>
+                                <td>
                                     <textarea class="form-control" name="description[]" required></textarea>
                                 </td>
                                 <td>
-                                    <select class="form-select" name="project_type_id[]" required>
+                                    <select class="form-select" name="work_status_id[]" required>
                                         <option value="">Select</option>
-                                        @foreach($projectTypes as $projectType)
-                                        <option value="{{ $projectType->id }}">{{ $projectType->name }}</option>
+                                        @foreach($workStatus as $workStat)
+                                        <option value="{{ $workStat->id }}">{{ $workStat->name }}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -76,7 +80,7 @@
                         </tbody>
                     </table>
 
-                    <a href="{{url('admin/master/permission/list')}}" class="btn btn-danger waves-effect waves-light w-md">Cancel</a>
+                    <a href="{{url('admin/task/list')}}" class="btn btn-danger waves-effect waves-light w-md">Cancel</a>
                     <button type="submit" class="btn btn-primary waves-effect waves-light w-md">Submit</button>
                 </form>
             </div>
@@ -103,13 +107,16 @@
                                     </select>
                                 </td>
                                 <td>
+                                    <input type="text" class="form-control" name="module[]" />
+                                </td>
+                                <td>
                                     <textarea class="form-control" name="description[]" required></textarea>
                                 </td>
                                 <td>
-                                    <select class="form-select" name="project_type_id[]" required>
+                                    <select class="form-select" name="work_status_id[]" required>
                                         <option value="">Select</option>
-                                        @foreach($projectTypes as $projectType)
-                                        <option value="{{ $projectType->id }}">{{ $projectType->name }}</option>
+                                        @foreach($workStatus as $workStat)
+                                        <option value="{{ $workStat->id }}">{{ $workStat->name }}</option>
                                         @endforeach
                                     </select>
                                 </td>

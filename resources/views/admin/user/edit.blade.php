@@ -76,6 +76,13 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label class="col-form-label">Select Status <span class="text-danger">*</span></label>
+                        <select class="form-select" name="status">
+                            <option value="1" @if($user->status == "1")selected @endif>Active</option>
+                            <option value="0" @if($user->status == "0")selected @endif>Inactive</option>
+                        </select>
+                    </div>
 
                     <a href="{{url('admin/user/list')}}" class="btn btn-danger waves-effect waves-light w-md">Cancel</a>
                     <button type="submit" class="btn btn-primary waves-effect waves-light w-md">Submit</button>

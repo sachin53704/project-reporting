@@ -39,6 +39,7 @@
                             <th>Start Time</th>
                             <th>End Time</th>
                             <th>Project</th>
+                            <th>Module</th>
                             <th>Work Status</th>
                             <th>Description</th>
                             <th>Action</th>
@@ -116,8 +117,17 @@
                         },
                     },
                     {
-                        data: 'project_type_name',
-                        name: 'project_types.name',
+                        data: 'module',
+                        name: 'projects.module',
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, row){
+                            return data;
+                        },
+                    },
+                    {
+                        data: 'work_status_name',
+                        name: 'work_status.name',
                         render: function(data, type, row){
                             return data;
                         },
